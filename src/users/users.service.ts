@@ -26,8 +26,12 @@ export class UsersService {
   findOne(id: number) {
     return this.userRepository.findOneBy({ id });
   }
-  findOneByEmail(email: string) {
-    return this.userRepository.findOneBy({ email });
+
+  findOneByEmailAndPassword(email: string) {
+    return this.userRepository.findOne({
+      where: { email },
+      select: { password: true },
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
