@@ -1,7 +1,10 @@
+import { Role } from 'src/roles/entities/role.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,6 +25,9 @@ export class User {
   gender: 'male' | 'female' | 'other';
   @Column()
   mobileNumber: string;
+  @ManyToMany(() => Role, (role) => role.users)
+  @JoinTable()
+  roles: Role[];
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()
